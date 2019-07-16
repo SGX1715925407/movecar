@@ -386,6 +386,7 @@ export default {
         line-height: 0.37rem;
         p {
           .pstyle();
+          text-align:left;
           //       .zhmoney {
           //    }
           .money {
@@ -395,6 +396,7 @@ export default {
       }
       .Paylitwo {
         height: 0.71rem;
+        
         .flex-column();
         .payborderbottom();
 
@@ -402,6 +404,7 @@ export default {
           padding-top: 0.12rem;
           flex: 1;
           .pstyle();
+           text-align:left;
         }
         & > p:nth-child(2) {
           flex: 1;

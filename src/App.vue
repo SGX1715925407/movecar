@@ -21,7 +21,7 @@ export default {
     console.log(setRem);
     setRem.setRem();
     window.onresize= setRem.setRem;
-    this.$router.push('/Evaluation');
+    this.$router.push('/Home');
   }
   ,
     watch: {//使用watch 监听$router的变化
@@ -48,6 +48,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  text-align: center;
 }
 
 .slide-right-enter-active,

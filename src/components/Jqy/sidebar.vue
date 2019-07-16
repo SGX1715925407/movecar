@@ -1,5 +1,5 @@
 <template>
-  <div class="side-box" :class="{'ani':bol}" @touchstart="fn" >
+  <div class="side-box " :class="{'ani':bol}" @touchstart="fn"  >
     <div class="side-content" >
       <!-- 用户信息 -->
       <div class="side-use">
@@ -50,7 +50,7 @@
 
 <script>
 // 引用公共bus.js进行传值
-import Bus from './bus.js'
+import Bus from './bus.js';
 export default {
   data() {
     return {
@@ -77,6 +77,7 @@ export default {
 <style scoped lang='less'>
 
 .side-box {
+ 
   position:absolute;
   top:0;
   left:-10rem;
@@ -164,4 +165,7 @@ position:absolute;
 top:0;
 left:0;
 }
+  .delay {
+    animation-delay: 0.05s;
+  }
 </style>

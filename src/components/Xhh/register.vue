@@ -16,7 +16,7 @@
 <input type="password" required placeholder="请输入密码">
 <div class="right">获取验证码</div>
 </div>
- <router-link to="/login">
+ <router-link to="/Orderinformation">
 <button>注册</button>
 <p>点击注册表示同意《平价租车协议》</p>
 </router-link>

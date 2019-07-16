@@ -211,6 +211,7 @@ export default new Router({
         },
         {
           path: 'Jkshop',
+          meta: { index: 6 },
           name: 'Jkshop',
           component: Jkshop
         },
@@ -254,6 +255,7 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
+      
     },
   ]
 })

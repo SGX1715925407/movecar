@@ -380,6 +380,7 @@ export default {
       .drivernews{
         flex:2.5;
         display: flex;
+        text-align:left;
         &>div:nth-child(1){
           flex:1;
           p{

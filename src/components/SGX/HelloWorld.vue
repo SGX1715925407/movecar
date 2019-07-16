@@ -146,6 +146,7 @@ export default {
           height: 0.16rem;
           font-size: 0.16rem;
           color: rgba(0, 0, 0, 1);
+           text-align:left;
         }
         .time {
           margin-top: 0.06rem;
@@ -153,8 +154,10 @@ export default {
           height: 0.12rem;
           color: rgba(153, 153, 153, 1);
           font-weight: 500;
+           text-align:left;
           & > span:nth-child(1) {
             margin-right: 0.125rem;
+           
           }
         }
       }

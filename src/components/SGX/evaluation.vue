@@ -92,7 +92,7 @@
       </li>
       <li class="published animated bounceInUp delay3 faster">
         <div><span></span><span>匿名发表评论</span></div>
-        <div>发表评论</div>
+        <div> <router-link to="/shaixuanb">发表评论</router-link></div>
       </li>
     </ul>
   </div>
