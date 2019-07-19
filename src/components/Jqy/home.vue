@@ -4,7 +4,10 @@
     <side></side>
     <map_></map_>
     <chosecar></chosecar>
+    <router-link to="/Carlist">
+
     <button_ text="去选车" class="posi_"></button_>
+    </router-link>
   </div>
 </template>
 <script>

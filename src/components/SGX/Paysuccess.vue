@@ -3,7 +3,7 @@
     <Public>
       <div class="big-box" slot="heade">
         <div class="header">
-          <router-link to='/HelloWorld' class="back">
+          <router-link to='/Home' class="back">
             <!-- <img src="../../../static/SGXimg/icon_back@2x.png" alt="" /> -->
           </router-link>
           <span class="head">支付完成</span>
@@ -33,7 +33,7 @@
         </p>
       </div>
     </div>
-    <router-link to="/Orderdetails" class="backhome">
+    <router-link to="/Home" class="backhome">
         返回首页
     </router-link>
   </div>

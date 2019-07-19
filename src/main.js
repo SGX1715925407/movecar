@@ -6,6 +6,17 @@ import router from './router'
 
 import Axios from "axios"
 Vue.prototype.axios = Axios
+
+
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+  Vue.use(MintUI)
+
+
+// import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import 'swiper/dist/css/swiper.css'
+// Vue.use(VueAwesomeSwiper, /* { default global options } */);
+
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
@@ -23,6 +34,7 @@ Vue.use(BaiduMap, {
 let store = new Vuex.Store({
   state:{
     num:500,
+    
   },
   mutations:{
     change(state,v){
@@ -46,7 +58,7 @@ Vue.use(Animation);
 new Vue({
   el: '#app',
   router,
-  // store,
+  store,
   components: { App },
   template: '<App/>'
   
