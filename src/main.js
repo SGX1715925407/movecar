@@ -34,7 +34,6 @@ Vue.use(BaiduMap, {
 let store = new Vuex.Store({
   state:{
     num:500,
-    
   },
   mutations:{
     change(state,v){
@@ -43,7 +42,24 @@ let store = new Vuex.Store({
     changes(state,a){
       state.num = a;
     }
-  }
+  },
+
+//   axios.interceptors.request.use(function(request){
+//   that.orderspeed_bol=true;
+//   that.orderspeed_bol_one=false;
+//    // return request
+// },function(err){
+// throw err;
+// });
+// //    拦截响应
+// this.axios.interceptors.response.use((response)=>{
+//   this.interceptors.request=false;
+//   this.orderspeed_bol_one=true;
+//  //  return response
+// },(err)=>{
+//   throw err;
+// })
+
 })
 
 Vue.config.productionTip = false

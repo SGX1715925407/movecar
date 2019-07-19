@@ -21,7 +21,7 @@ export default {
 }
 
 .big-box{
-  margin-top:0.135rem;
+  // margin-top:0.135rem;
 .header {
   width: 100%;
   height: 0.45rem;

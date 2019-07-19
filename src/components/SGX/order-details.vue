@@ -3,16 +3,20 @@
     <Public>
       <div class="big-box" slot="heade">
         <div class="header">
-          <router-link to='/Home' class="back">
+          <router-link to="/Home" class="back">
             <!-- <img src="../../../static/SGXimg/icon_back@2x.png" alt="" /> -->
           </router-link>
           <span class="head">订单详情</span>
-           <span class="next"></span>
+          <span class="next"></span>
         </div>
       </div>
     </Public>
-    <ul class="list">
-      <li class="cardetails animated zoomIn  delay faster">
+    <div class="Loading_animation" v-if="orderspeed_bol_one">
+      <img src="../../../static/SGXimg/jiazai.gif" alt />
+      <p class="login_p">大人稍等,正在为您备马...</p>
+    </div>
+    <ul class="list" v-if="orderspeed_bol">
+      <li class="cardetails animated zoomIn delay faster">
         <div class="cardetails_one">
           <div>
             <p>车辆信息</p>
@@ -79,7 +83,7 @@
           </p>
         </div>
       </li>
-      <li class="insurance animated zoomIn  delay2 faster">
+      <li class="insurance animated zoomIn delay2 faster">
         <div class="drivertit1">
           <p class="fjfw">租车保障及附加服务</p>
         </div>
@@ -97,7 +101,7 @@
           </span>
         </div>
       </li>
-      <li class="driver animated zoomIn  delay3 faster">
+      <li class="driver animated zoomIn delay3 faster">
         <div class="drivertit2">
           <p class="fjfw1">预定信息</p>
         </div>
@@ -108,12 +112,15 @@
             <p>订单号</p>
           </div>
           <div>
-           <div>
-             <p class="pone">全小龙</p>
-             <p>身份证<span>161651651651615</span></p>
-           </div>
-           <p class="driverphone">1561651616</p>
-           <p>165165165165</p>
+            <div>
+              <p class="pone">全小龙</p>
+              <p>
+                身份证
+                <span>161651651651615</span>
+              </p>
+            </div>
+            <p class="driverphone">1561651616</p>
+            <p>165165165165</p>
           </div>
         </div>
       </li>
@@ -128,7 +135,9 @@ export default {
     return {
       jbfwbol: false,
       qmbol: false,
-      rsbol: false
+      rsbol: false,
+      orderspeed_bol: false,
+      orderspeed_bol_one: true
     };
   },
   methods: {
@@ -144,25 +153,50 @@ export default {
   },
   components: {
     Public
-  },mounted(){
-       this.axios
+  },
+  beforeMounted() {},
+  mounted() {
+    this.axios
       .get("http://172.25.1.194:8080/order/yijiesuanorders")
       .then(res => {
         console.log(res);
-        // this.list = res;
-        // console.log(this.list);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
-      console.log(666);
-    }
-}
+
+
+    let that = this;
+    this.axios.interceptors.request.use(
+      function(request) {
+        that.orderspeed_bol = false;
+        that.orderspeed_bol_one = true;
+        // return request
+      },
+      function(err) {
+        throw err;
+      }
+    );
+    //  拦截响应
+    this.axios.interceptors.response.use(
+      response => {
+        this.orderspeed_bol= true;
+        this.orderspeed_bol_one =false;
+        //  return response
+      },
+      err => {
+        throw err;
+      }
+    );
+
+    // console.log(666);
+  }
+};
 </script>
 
 <style scoped lang="less">
-*{
-    font-family:'PingFang-SC-Bold';
+* {
+  font-family: "PingFang-SC-Bold";
 }
 
 .flex-column {
@@ -186,17 +220,17 @@ export default {
   color: #f9c307;
   font-weight: bold;
 }
-.navmo{
-  font-size:0.12rem;
-  font-weight:bold;
-  color:#666666
+.navmo {
+  font-size: 0.12rem;
+  font-weight: bold;
+  color: #666666;
 }
-.drivertit{
- flex: 1;
-        display: flex;
-        align-items: center;
-          border-bottom:1px solid #ccc;
-          .pstyle()
+.drivertit {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  .pstyle();
 }
 .order {
   width: 100%;
@@ -214,7 +248,7 @@ export default {
     .cardetails {
       width: 3.43rem;
       height: 1.54rem;
-     
+
       // display: flex;
       // flex-direction: column;
       .flex-column();
@@ -233,7 +267,7 @@ export default {
 
           p {
             .pstyle();
-          text-align:left;
+            text-align: left;
           }
           img {
             width: 1.3rem;
@@ -245,14 +279,14 @@ export default {
           flex: 1.2;
           .carname {
             .pstyle();
-             text-align: left;
+            text-align: left;
           }
           .carnumber {
             margin-top: 0.07rem;
             color: #666666;
             font-size: 0.13rem;
             height: 0.13rem;
-             text-align: left;
+            text-align: left;
           }
           .bearing {
             display: flex;
@@ -345,17 +379,17 @@ export default {
     }
     .insurance {
       height: 0.75rem;
-      padding:0 0.12rem;
+      padding: 0 0.12rem;
       .flex-column();
-      .drivertit1{
-      .drivertit();
+      .drivertit1 {
+        .drivertit();
         .fjfw {
           .pstyle1();
         }
       }
 
       .fjfwxq {
-        flex:1;
+        flex: 1;
         display: flex;
         justify-content: space-around;
         // box-sizing:border-box;
@@ -385,64 +419,82 @@ export default {
     .driver {
       .flex-column();
       height: 1.3rem;
-       padding:0 0.12rem;
-      .drivertit2{
-       .drivertit();
-        .fjfw1{
+      padding: 0 0.12rem;
+      .drivertit2 {
+        .drivertit();
+        .fjfw1 {
           .pstyle1();
-        
         }
-      } 
-      .drivernews{
-        flex:2.5;
+      }
+      .drivernews {
+        flex: 2.5;
         display: flex;
-        text-align:left;
-        &>div:nth-child(1){
-          flex:1;
-        
-          p{
+        text-align: left;
+        & > div:nth-child(1) {
+          flex: 1;
+
+          p {
             .navmo();
             // text-indent:0.13rem;
-              text-align:left;
+            text-align: left;
           }
-          &>p:nth-child(1){
-            margin-top:0.08rem;
+          & > p:nth-child(1) {
+            margin-top: 0.08rem;
           }
-          &>p:nth-child(2){
-            margin-top:0.22rem;
+          & > p:nth-child(2) {
+            margin-top: 0.22rem;
           }
-          &>p:nth-child(3){
-            margin-top:0.07rem;
+          & > p:nth-child(3) {
+            margin-top: 0.07rem;
           }
         }
-        &>div:nth-child(2){
-          flex:2.65;
-            .pone{
-              
-              margin-top:0.07rem;
-            }
-            p{
-              font-size:0.12rem;
-              font-weight: bold;
-            }
-          .driverphone{
-            margin:0.06rem 0 0.09rem 0;
+        & > div:nth-child(2) {
+          flex: 2.65;
+          .pone {
+            margin-top: 0.07rem;
+          }
+          p {
+            font-size: 0.12rem;
+            font-weight: bold;
+          }
+          .driverphone {
+            margin: 0.06rem 0 0.09rem 0;
           }
         }
       }
     }
   }
 }
-  .delay {
-    animation-delay: 0.08s;
+.Loading_animation {
+  width: 100%;
+  height: 80%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  img {
+    width: 2rem;
+    height: 2rem;
   }
-  .delay1 {
-    animation-delay: 0.13s;
+  .login_p {
+    font-size: 0.2rem;
+    color: #ccc;
+    font-weight: bold;
+    text-align: center;
   }
-  .delay2 {
-    animation-delay: 0.18s;
-  }
-  .delay3 {
-    animation-delay: 0.23s;
-  }
+}
+
+.delay {
+  animation-delay: 0.08s;
+}
+.delay1 {
+  animation-delay: 0.13s;
+}
+.delay2 {
+  animation-delay: 0.18s;
+}
+.delay3 {
+  animation-delay: 0.23s;
+}
 </style>

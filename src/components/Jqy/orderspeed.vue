@@ -36,8 +36,11 @@
 import sidebar from "./sidebar"
 export default {
   data() {
-    return {};
-  },
+    return {
+     
+    };
+  }
+  ,
   methods: {},
   components: {
       sidebar

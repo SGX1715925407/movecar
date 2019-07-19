@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-  <div class="side-box " :class="{'ani':bol}" @touchstart="fn"  >
-=======
   <div class="side-box" :class="{'ani':bol}"  >
->>>>>>> chenlulu37/master
     <div class="side-content" >
       <!-- 用户信息 -->
       <div class="side-use">

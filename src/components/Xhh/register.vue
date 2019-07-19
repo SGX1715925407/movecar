@@ -15,14 +15,6 @@
 <input type="text" required placeholder="请输入手机号" id='phone'>
 <input type="text" required placeholder="请输入验证码" id='pwd'>
 <input type="password" required placeholder="请输入密码">
-<<<<<<< HEAD
-<div class="right">获取验证码</div>
-</div>
- <router-link to="/Orderinformation">
-<button>注册</button>
-<p>点击注册表示同意《平价租车协议》</p>
-</router-link>
-=======
 <div v-show="show" @click="getCode" class="right">获取验证码</div>
 <div v-show="!show" class="count right">{{count}} s</div>
  <router-link to="/login">
@@ -33,14 +25,13 @@
 
 <p class="tpb">点击注册表示同意《平价租车协议》</p>
 
->>>>>>> chenlulu37/master
 </div>
   </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'vant';
+// import { Toast } from 'vant';
 export default {
   data() {
     return {
