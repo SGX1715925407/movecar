@@ -144,8 +144,20 @@ export default {
   },
   components: {
     Public
-  }
-};
+  },mounted(){
+       this.axios
+      .get("http://172.25.1.194:8080/order/yijiesuanorders")
+      .then(res => {
+        console.log(res);
+        // this.list = res;
+        // console.log(this.list);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      console.log(666);
+    }
+}
 </script>
 
 <style scoped lang="less">
@@ -202,6 +214,7 @@ export default {
     .cardetails {
       width: 3.43rem;
       height: 1.54rem;
+     
       // display: flex;
       // flex-direction: column;
       .flex-column();
@@ -220,6 +233,7 @@ export default {
 
           p {
             .pstyle();
+          text-align:left;
           }
           img {
             width: 1.3rem;
@@ -231,12 +245,14 @@ export default {
           flex: 1.2;
           .carname {
             .pstyle();
+             text-align: left;
           }
           .carnumber {
             margin-top: 0.07rem;
             color: #666666;
             font-size: 0.13rem;
             height: 0.13rem;
+             text-align: left;
           }
           .bearing {
             display: flex;
@@ -383,9 +399,11 @@ export default {
         text-align:left;
         &>div:nth-child(1){
           flex:1;
+        
           p{
             .navmo();
-            text-indent:0.13rem;
+            // text-indent:0.13rem;
+              text-align:left;
           }
           &>p:nth-child(1){
             margin-top:0.08rem;

@@ -156,6 +156,14 @@ export default {
   },
   components: {
     Public
+  },
+  mounted(){
+    this.axios.get("http://172.25.1.194:8080/order/daijiesuanorders").then((res)=>{
+      console.log(res);
+    }) 
+    .catch((error) => {
+        console.log(error);
+      });
   }
 };
 </script>
@@ -266,6 +274,7 @@ export default {
 
           p {
             .pstyle();
+            text-align:left;
           }
           img {
             width: 1.11rem;
@@ -277,12 +286,14 @@ export default {
           flex: 1.2;
           .carname {
             .pstyle();
+          text-align:left;
           }
           .carnumber {
             margin-top: 0.07rem;
             color: #666666;
             font-size: 0.13rem;
             height: 0.13rem;
+            text-align:left;
           }
           .bearing {
             display: flex;

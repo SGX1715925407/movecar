@@ -10,9 +10,6 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
 
-import Vant from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Vant);
 
 import Vuex from 'vuex';
 Vue.use(Vuex);

@@ -30,7 +30,11 @@
         <div>
           车子质量很好，希望更多的朋友信赖．店主态度特
           好，我会再次光顾的．如果可以再便宜点那就更好啦！
-          我会向朋友介绍你家的希望你们店以后发展的更好。
+          我会向朋友介绍你家的希望你们店以后发展的更好
+
+         
+         
+          <!-- </textarea> -->
         </div>
       </li>
       <li class="animated bounceInRight frist_div delay1 faster">
@@ -53,7 +57,7 @@
         <div>
           车子质量很好，希望更多的朋友信赖．店主态度特
           好，我会再次光顾的．如果可以再便宜点那就更好啦！
-          我会向朋友介绍你家的希望你们店以后发展的更好。
+          我会向朋友介绍你家的希望你们店以后发展的更好。6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
         </div>
       </li>
       <li class="animated bounceInRight frist_div delay2 faster">
@@ -97,14 +101,15 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      transitionName: ""
+      transitionName: "",
+      heightbol:false
     };
   },
   components: {
     Index,
     Public
   },
-  methods: {
+  methods:{
     // fn() {
     //  this.axios
     //   .get("http://172.25.1.194:8080/user/login?name=15638578392&password=000000")
@@ -117,6 +122,7 @@ export default {
     //     console.log(error);
     //   });
     // }
+    
   }
 };
 </script>
@@ -186,15 +192,20 @@ export default {
       background: rgba(255, 255, 255, 1);
       border-radius: 0.1rem;
       margin-top: 0.12rem;
-      padding: 0.105rem 0.185rem 0.095rem 0.13rem;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      overflow: hidden;
+      text-align:left;
       font-size: 0.13rem;
       color: rgba(51, 51, 51, 1);
       font-weight: 500;
+      padding:0.10rem 0.13rem;
+      overflow: hidden;
     }
+    .divheighthac{
+      height:0.64rem;
+    }
+    .divheighthad{
+      height:'';
+    }
+
   }
   .more-comments {
     // position:absolute;

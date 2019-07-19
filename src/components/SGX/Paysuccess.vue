@@ -18,7 +18,7 @@
       <div class="text-div">
         <p class="order-number">
           订单号:
-          <span>123564893215</span>已完成
+          <span>{{obj}}</span>已完成
         </p>
         <p class="time">请按时到店取车</p>
         <p class="GPS">
@@ -43,11 +43,17 @@
 import Public from "./public-header";
 export default {
   data() {
-    return {};
+    return {
+
+      obj:this.$route.query.p,
+    };
   },
   methods: {},
   components: {
     Public
+  },
+  mounted(){
+  
   }
 };
 </script>

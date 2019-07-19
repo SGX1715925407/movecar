@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="cardetails_two_div">
-            <p class="cardetails_two_div_one_p"> <span>订单号</span><span>123154654</span></p>
+            <p class="cardetails_two_div_one_p"> <span>订单号</span><span>{{abc}}</span></p>
             <p class="cardetails_two_div_two_p"><span>时间</span><span>2015-5-2964654655</span></p>
         </div>
       </li>
@@ -34,13 +34,14 @@
           </textarea>
         </div>
         <div class="stores_two_div">
-          <div>
-            <div class="upimg">
-            
-            </div>
-          <p>点击上传图片</p>
+          <div class="upimg">
+             <input accept="image/*" name="img" id="upload_file" type="file" @change="update" webkitRelativePath multiple>
+             
           </div>
-          
+          <div class="image">
+            <img :src='ImgUrl'alt="" id="imged">
+          </div>
+         
         </div>
         <div class="stores_three_div">
           <p class="stores_three_div_one_p">
@@ -92,7 +93,9 @@
       </li>
       <li class="published animated bounceInUp delay3 faster">
         <div><span></span><span>匿名发表评论</span></div>
-        <div> <router-link to="/shaixuanb">发表评论</router-link></div>
+        <div @click="fn()">
+          <router-link to="" class="router_" >发表评论</router-link>
+          </div>
       </li>
     </ul>
   </div>
@@ -100,49 +103,107 @@
 
 <script>
 import Public from "./public-header";
+
+// import Uploader from "./index";
 export default {
   data() {
     return {
-      textarea:"对于这次的车辆使用整个过程，您有什么意见或者建议吗？ 很期待您的意见哦!",
       score:5,
       score1:5,
+       fileList: [],
+      width:0.6+"rem",
+      // height:0.55+"rem"
+      abc:"13213213",
+      ImgUrl:''
     };
   },
-  computed:{ //计算属性
-itemClasses(){
-let result = []; // 返回的是一个数组,用来遍历输出星星
-let score = Math.floor(this.score * 2 ) / 2; // 计算所有星星的数量
-let hasDecimal = score % 1 !== 0; // 非整数星星判断
-let integer = Math.floor(score); // 整数星星判断
-for(let i=0;i<integer;i++){ // 整数星星使用on
-result.push("on"); // 一个整数星星就push一个CLS_ON到数组
-}
-if(hasDecimal){ // 非整数星星使用half
-result.push("half"); // 类似
+ 
+ computed:{ //计算属性
+              itemClasses(){
+              let result = []; // 返回的是一个数组,用来遍历输出星星
+              let score = Math.floor(this.score * 2 ) / 2; // 计算所有星星的数量
+              let hasDecimal = score % 1 !== 0; // 非整数星星判断
+              let integer = Math.floor(score); // 整数星星判断
+              for(let i=0;i<integer;i++){ // 整数星星使用on
+              result.push("on"); // 一个整数星星就push一个CLS_ON到数组
+              }
+              if(hasDecimal){ // 非整数星星使用half
+              result.push("half"); // 类似
 
-} 
-while(result.length < 5){// 余下的用无星星补全,使用off
-result.push("off");
-}
-return result;
-}
-},
-  methods:{
- stars:function(index){
-this.score = index;
-console.log(index)
-},
- stars1:function(index){
-this.score1 = index;
-console.log(index)
-}
-    }
+              } 
+              while(result.length < 5){// 余下的用无星星补全,使用off
+              result.push("off");
+              }
+              return result;
+              }
+              },
+                methods:{
+              stars:function(index){
+              this.score = index;
+              console.log(index)
+              },
+              stars1:function(index){
+              this.score1 = index;
+              console.log(index)
+                },
+                fn(){
+                  this.$router.push({
+                    path:'/Paysuccess',
+                    query:{
+                      p:this.abc,
+                    }
+                  })
+                },
+                
+                update (e) { 
+                 // 上传照片
+              
+   var self = this
+   let file = e.target.files[0];
+   console.log(file);
+  //  this.imgs=file;
+   /* eslint-disable no-undef */
+   let param = new FormData() // 创建form对象
+   param.append('file', file, file.name) // 通过append向form对象添加数据
+   param.append('chunk', '0') // 添加form表单中其他数据
+   console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+   let config = {
+    headers: {'Content-Type': 'multipart/form-data'}
+   }
+  //  const instance=this.axios.create({
+  //    withCredentials:true
+  //  })
+  // instance.post('http://172.25.1.194:8080/', param, config)
+  //   .then(response => {
+  //    if (response.data.code === 0) {
+  //     self.ImgUrl = response.data.data
+  //    }
+  //    console.log(response.data)
+  //   })
 
+      var imgFile = file;
+        var fr = new FileReader();
+        fr.onload = function () {
+          document.getElementById('imged').src = fr;
+        };
+          fr.readAsDataURL(imgFile);
+        console.log(imgFile);
+  },
+//   great: function () {
+//     document.getElementById('upload_file').onchange = function () {
+      
+//     }
+// }      
+                
+              
+  }
   ,
   components: {
-    Public
-  },mounted(){
-   
+    Public,
+    // Uploader
+  },
+  mounted(){
+    //  this.great();
 }
 }
 </script>
@@ -185,18 +246,29 @@ console.log(index)
   background: url("../../../static/SGXimg/wenhao.png") no-repeat center center;
   background-size: 0.18rem 0.18rem;
 }
+/deep/ #upload_file{
+       width:100%;
+       height:100%;
+        _height: auto;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        -ms-filter: "alpha(opacity=0)";
+        background-color: #ccc;
+        }
+
+
 .evaluation_bigbox {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   background-color: #f7f8fa;
   .list {
+    height:100%;
     padding: 0.23rem 0.16rem 0.16rem 0.16rem;
     li {
     //   margin-top: 0.12rem;
       background-color: white;
       border-radius: 0.1rem;
       box-sizing: border-box;
-      
       animation-duration: 0.8s;
     }
     .cardetails {
@@ -226,6 +298,7 @@ console.log(index)
       .cardetails_two_div{
           flex:1.5;
           font-size:0;
+          text-align:left;
           .cardetails_two_div_one_p{
           
               margin-top:0.12rem;
@@ -274,20 +347,28 @@ console.log(index)
       }
       .stores_two_div{
         flex:1.15;
-        div{
-         
-        
-           .upimg{
+        height:0.76rem;
+        font-size: 0; position: relative;
+        .upimg{
           width:0.6rem;
           height:0.55rem;
-          background: url('../../../static/SGXimg/upimg.png')no-repeat center center;
           background-color:#F0F1F5;
-          background-size: 0.29rem 0.24rem;
-           margin-left:0.12rem;
-         
-        } p{
-            .font12();
-             margin:0.05rem 0 0 0.12rem;
+          z-index:3;
+          position: absolute;
+          left: 0.13rem;
+          top: 0;
+          width:0.6rem;       
+          height: 0.55rem;
+          .image{
+            width:0.6rem;
+            height:0.55rem;
+            position:absolute;
+            top:0;
+            left:0.75rem;
+            img{
+              width:100%;
+              height:100%;
+            }
           }
         }
        
@@ -364,9 +445,11 @@ console.log(index)
           background-size: 0.29rem 0.24rem;
            margin-left:0.12rem;
          
+         
         } p{
             .font12();
              margin:0.05rem 0 0 0.12rem;
+             text-align:left;
           }
         }
        
@@ -427,10 +510,14 @@ console.log(index)
     }
     &>div:nth-child(2){
       font-size:0.16rem;
-      color:white;
+    
       font-weight: bold;
+      .router_{
+          color:white;
+      }
     }
     &>div:nth-child(1){
+   
       font-size:0.12rem;
       color:white;
       font-weight: bold;
