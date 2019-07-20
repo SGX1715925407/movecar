@@ -15,6 +15,9 @@
       <img src="../../../static/SGXimg/jiazai.gif" alt />
       <p class="login_p">大人稍等,正在为您备马...</p>
     </div>
+    <!-- <div class="Loading_animation" v-if="orderspeed_bol_two">
+      <p class="login_p login_p_one">您还没有订单哦</p>
+    </div> -->
     <ul class="list" v-if="orderspeed_bol">
       <li class="cardetails animated zoomIn delay faster">
         <div class="cardetails_one">
@@ -34,23 +37,23 @@
         </div>
         <div class="cardetails_two">
           <div>
-            <p class="cartime">还车时间</p>
+            <p class="cartime">租车时间</p>
             <p class="cardate">
-              <span>2015-12-1</span>
-              <span>周二</span>
+              <span>{{$store.state.beginnow}}</span>
+              <span></span>
             </p>
           </div>
           <div>
             <p class="carml">
               租车时长:
-              <span>3天</span>
+              <span>{{$store.state.speedday_}}</span>
             </p>
           </div>
           <div>
             <p class="cartime">还车时间</p>
             <p class="cardate">
-              <span>2015-12-1</span>
-              <span>周二</span>
+              <span>{{$store.state.endfuture}}</span>
+              <span></span>
             </p>
           </div>
         </div>
@@ -130,6 +133,7 @@
 
 <script>
 import Public from "./public-header";
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -137,7 +141,8 @@ export default {
       qmbol: false,
       rsbol: false,
       orderspeed_bol: false,
-      orderspeed_bol_one: true
+      orderspeed_bol_one: true,
+      // orderspeed_bol_two: true,
     };
   },
   methods: {
@@ -149,14 +154,9 @@ export default {
     },
     rs() {
       this.rsbol ? (this.rsbol = false) : (this.rsbol = true);
-    }
-  },
-  components: {
-    Public
-  },
-  beforeMounted() {},
-  mounted() {
-    this.axios
+    },
+        axiosfn(){ 
+          this.axios
       .get("http://172.25.1.194:8080/order/yijiesuanorders")
       .then(res => {
         console.log(res);
@@ -164,32 +164,44 @@ export default {
       .catch(error => {
         console.log(error);
       });
-
-
-    let that = this;
-    this.axios.interceptors.request.use(
-      function(request) {
-        that.orderspeed_bol = false;
-        that.orderspeed_bol_one = true;
-        // return request
       },
-      function(err) {
-        throw err;
+      axiosreq_(){
+        this.axios.interceptors.request.use(function (config) {
+        // Do something before request is sent
+        console.log('开始请求')
+        console.log(`请求地址: ${config.url}`)
+        return config
+      }, function (error) {
+        // Do something with request error
+        console.log('请求失败')
+        return Promise.reject(error)
+      })
+      this.axios.interceptors.response.use( (config)=> {
+        // Do something before request is sent
+       this.orderspeed_bol=true,
+      this.orderspeed_bol_one=false
+        console.log('接收响应');
+        return config
+      }, function (error) {
+        // Do something with request error
+        console.log('响应出错')
+        return Promise.reject(error)
+      })
       }
-    );
-    //  拦截响应
-    this.axios.interceptors.response.use(
-      response => {
-        this.orderspeed_bol= true;
-        this.orderspeed_bol_one =false;
-        //  return response
-      },
-      err => {
-        throw err;
-      }
-    );
+    
+  },
+  components: {
+    Public
+  },
+  beforeMounted() {
 
-    // console.log(666);
+  },
+  mounted() {
+    setTimeout(() => {
+      this.axiosreq_()  
+    this.axiosfn()
+    },900);
+    
   }
 };
 </script>
@@ -243,7 +255,7 @@ export default {
       background-color: white;
       border-radius: 0.1rem;
       box-sizing: border-box;
-      animation-duration: 0.8s;
+      animation-duration: 0.3s;
     }
     .cardetails {
       width: 3.43rem;
@@ -467,13 +479,13 @@ export default {
 }
 .Loading_animation {
   width: 100%;
-  height: 80%;
+  height:93%;
   background-color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   img {
+    margin-top:1rem;
     width: 2rem;
     height: 2rem;
   }
@@ -483,18 +495,21 @@ export default {
     font-weight: bold;
     text-align: center;
   }
+  .login_p_one{
+    margin-top:1.6rem;
+  }
 }
 
 .delay {
-  animation-delay: 0.08s;
+  animation-delay: 0.05s;
 }
 .delay1 {
-  animation-delay: 0.13s;
+  animation-delay: 0.10s;
 }
 .delay2 {
-  animation-delay: 0.18s;
+  animation-delay: 0.15s;
 }
 .delay3 {
-  animation-delay: 0.23s;
+  animation-delay: 0.20s;
 }
 </style>

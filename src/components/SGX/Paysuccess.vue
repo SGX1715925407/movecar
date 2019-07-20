@@ -46,6 +46,7 @@ export default {
     return {
 
       obj:this.$route.query.p,
+      obj:"1644565"
     };
   },
   methods: {},

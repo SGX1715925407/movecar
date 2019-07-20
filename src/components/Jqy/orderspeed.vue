@@ -1,6 +1,6 @@
 <template>
   <div>
-      <sidebar></sidebar>
+    <sidebar></sidebar>
     <div class="order-speed">
       <div class="area">
         <p>
@@ -19,21 +19,21 @@
         </p>
       </div>
       <div class="time">
-        <p>7月8号</p>
-        <p>7月8号</p>
+        <p>{{$store.state.beginnow}}</p>
+        <span>{{$store.state.speedday_}}</span>
+        <p>{{$store.state.endfuture}}</p>
       </div>
       <div class="speed">
         <p>
           订单金额：
-          <span>￥128</span>
+          <span>￥{{($store.state.speedday_.split("天")[0])*128}}</span>
         </p>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import sidebar from "./sidebar"
+import sidebar from "./sidebar";
 export default {
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
   ,
   methods: {},
   components: {
-      sidebar
+    sidebar
   }
 };
 </script >

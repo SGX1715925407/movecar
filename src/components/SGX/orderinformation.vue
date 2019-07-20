@@ -32,21 +32,21 @@
           <div>
             <p class="cartime">还车时间</p>
             <p class="cardate">
-              <span>2015-12-1</span>
-              <span>周二</span>
+              <span>{{$store.state.beginnow}}</span>
+              <span></span>
             </p>
           </div>
           <div>
             <p class="carml">
               租车时长:
-              <span>3天</span>
+            <span>{{$store.state.speedday_}}</span>
             </p>
           </div>
           <div>
             <p class="cartime">还车时间</p>
             <p class="cardate">
-              <span>2015-12-1</span>
-              <span>周二</span>
+              <span>{{$store.state.endfuture}}</span>
+              <span></span>
             </p>
           </div>
         </div>
@@ -154,6 +154,7 @@ export default {
       this.rental_agreement && (this.jbfwbol || this.qmbol || this.rsbol)
         ? console.log("zhi fu cheng gong")
         : console.log("qingtongyi");
+        // this.$set(store.a,true);   
     }
   },
   components: {

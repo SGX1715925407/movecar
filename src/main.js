@@ -10,8 +10,12 @@ Vue.prototype.axios = Axios
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
-  Vue.use(MintUI)
+Vue.use(MintUI)
 
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 
 // import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/dist/css/swiper.css'
@@ -19,7 +23,7 @@ import 'mint-ui/lib/style.css'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper, /* { default global options } */);
+Vue.use(VueAwesomeSwiper, /* { default global options } */ );
 
 
 import Vuex from 'vuex';
@@ -32,34 +36,33 @@ Vue.use(BaiduMap, {
 })
 
 let store = new Vuex.Store({
-  state:{
-    num:500,
+  state: {
+    num: 500,
+    speedday_:1,
+    beginnow: '',
+    endfuture: '',
+    // a:false
   },
-  mutations:{
-    change(state,v){
+  mutations: {
+    change(state, v) {
       state.num = v;
     },
-    changes(state,a){
+    changes(state, a) {
       state.num = a;
-    }
-  },
-
-//   axios.interceptors.request.use(function(request){
-//   that.orderspeed_bol=true;
-//   that.orderspeed_bol_one=false;
-//    // return request
-// },function(err){
-// throw err;
-// });
-// //    拦截响应
-// this.axios.interceptors.response.use((response)=>{
-//   this.interceptors.request=false;
-//   this.orderspeed_bol_one=true;
-//  //  return response
-// },(err)=>{
-//   throw err;
-// })
-
+    },
+    //租车天数
+    speedday_(state, date) {
+      state.speedday_ = date;
+    },
+    //租车开始时间
+    beginnow(state, date) {
+      state.beginnow = date;
+    },
+    //租车结束时间
+    endfuture(state, date) {
+      state.endfuture = date;
+    },
+  }
 })
 
 Vue.config.productionTip = false
@@ -75,7 +78,9 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
-  
+
 })

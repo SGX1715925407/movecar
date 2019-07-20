@@ -21,7 +21,7 @@ export default {
     console.log(setRem);
     setRem.setRem();
     window.onresize= setRem.setRem;
-    this.$router.push('/Home');
+    this.$router.push('/Orderinformation');
   }
   ,
   watch: {

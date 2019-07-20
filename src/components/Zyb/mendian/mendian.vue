@@ -38,7 +38,10 @@
                 <img src="../image/icon_xing_n@2x.png" alt="">
             </div>
         </div>
+        <router-link to="/Carlist">
       <input type="button" value="预定车辆" class="putin" />
+        </router-link>
+          
     </div>
   </div>
 </template>
